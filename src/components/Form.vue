@@ -6,10 +6,9 @@ import { ref } from 'vue'
 import * as yup from 'yup'
 
 const isClick = ref(false)
+const emit = defineEmits(['addContentArray'])
 
 const keys = Object.keys(elements)
-
-const emit = defineEmits(['addContentArray'])
 
 const updateClick = () => (isClick.value = true)
 
