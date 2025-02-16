@@ -31,8 +31,10 @@ const login = inject('login')
 const { value: body, errorMessage: errorBody } = useField('body')
 
 const onSubmit = handleSubmit(async (values) => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser
   const body = {
-    name: currentUser.value.displayName,
+    name: currentUser.displayName,
     ...values
   }
 
@@ -49,10 +51,6 @@ const onSubmit = handleSubmit(async (values) => {
     })
 })
 
-onMounted(() => {
-  const auth = getAuth();
-  currentUser.value = auth.currentUser
-})
 </script>
 
 <template>
