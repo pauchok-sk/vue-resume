@@ -1,19 +1,24 @@
 <script setup>
-import { getAuth } from 'firebase/auth';
-import { inject } from 'vue';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { inject, onMounted, ref } from 'vue';
 
 const logout = inject("logout");
 const login = inject("login");
-const isLogin = inject("isLogin");
 
-const auth = getAuth();
-const currentUser = auth.currentUser;
+const currentUser = ref(null);
+
+onMounted(() => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (dataUser) => {
+    currentUser.value = dataUser
+  })
+})
 
 </script>
 
 <template>
   <div class="card right">
-    <div v-if="isLogin" class="flex">
+    <div v-if="currentUser" class="flex">
       <h3>{{ currentUser.displayName }}</h3>
       <button @click="logout" class="btn primary">Выйти</button>
     </div>

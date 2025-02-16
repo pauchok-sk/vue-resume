@@ -8,7 +8,6 @@ import axios from 'axios'
 import { getAuth } from 'firebase/auth'
 
 const isClickForm = ref(false)
-const currentUser = ref(null)
 
 const emit = defineEmits(['getComments'])
 
